@@ -7,7 +7,8 @@ defmodule Dictionary do
   end
 
   def word_list do
-    "dictionary/assets/words.txt"
+    "../assets/words.txt"
+      |> Path.expand(__DIR__)
       |> File.read()
       |> process_file
   end

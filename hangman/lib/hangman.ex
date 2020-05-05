@@ -1,5 +1,5 @@
 defmodule Hangman do
   def hello do
-    :world
+     "#{Dictionary.word_count} available words"
   end
 end
