@@ -58,4 +58,29 @@ defmodule GameTest do
     assert game.game_state == :won
     assert game.turns_left == 7
   end
+
+  test "a bad guess is recognized" do
+    { game, _tally } = Game.new_game("yes") |> Game.make_move("x")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 6
+  end
+
+  test "a lost game is recognized" do
+    [
+      { 'a', :bad_guess },
+      { 'b', :bad_guess },
+      { 'c', :bad_guess },
+      { 'd', :bad_guess },
+      { 'e', :bad_guess },
+      { 'f', :bad_guess },
+      { 'g', :lost },
+    ] |> Enum.with_index()
+      |> Enum.reduce(Game.new_game("x"), fn {{move, state}, index}, game ->
+        { game, _tally } = Game.make_move(game, move)
+        assert game.game_state == state
+        assert game.turns_left == 7 - (index + 1)
+
+        game
+      end)
+  end
 end
