@@ -26,6 +26,11 @@ defmodule GameTest do
     end
   end
 
+  test "a invalid guess is flagged" do
+    game = Game.new_game() |> Game.make_move(1)
+    assert game.game_state == :invalid_guess
+  end
+
   test "first occurrence of letter is not marked as already_used" do
     game = Game.new_game() |> Game.make_move("x")
     assert game.game_state != :already_used
@@ -67,13 +72,13 @@ defmodule GameTest do
 
   test "a lost game is recognized" do
     [
-      { 'a', :bad_guess },
-      { 'b', :bad_guess },
-      { 'c', :bad_guess },
-      { 'd', :bad_guess },
-      { 'e', :bad_guess },
-      { 'f', :bad_guess },
-      { 'g', :lost },
+      { "a", :bad_guess },
+      { "b", :bad_guess },
+      { "c", :bad_guess },
+      { "d", :bad_guess },
+      { "e", :bad_guess },
+      { "f", :bad_guess },
+      { "g", :lost },
     ] |> Enum.with_index()
       |> Enum.reduce(Game.new_game("x"), fn {{move, state}, index}, game ->
         game = Game.make_move(game, move)
