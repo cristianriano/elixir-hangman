@@ -38,7 +38,7 @@ defmodule Hangman.Game do
     accept_move(game, guess, MapSet.member?(game.used, guess))
   end
 
-  defp process_guess(game, guess, _invalid_guess) do
+  defp process_guess(game, _guess, _invalid_guess) do
     %{ game | game_state: :invalid_guess }
   end
 
