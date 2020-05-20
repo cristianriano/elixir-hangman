@@ -1,27 +1,6 @@
-require Logger
-
 defmodule Dictionary do
-  def random_word do
-    word_list()
-      |> Enum.random
-  end
+  alias Dictionary.WordList
 
-  def word_list do
-    "../assets/words.txt"
-      |> Path.expand(__DIR__)
-      |> File.read()
-      |> process_file
-  end
-
-  def process_file({:ok, file}) do
-    file
-      |> String.split(~r/\n/)
-  end
-
-  def process_file({:error, reason}) do
-    Logger.error("File error: #{reason}")
-    []
-  end
-
-  def word_count, do: word_list() |> length
+  defdelegate start(),            to: WordList, as: :word_list
+  defdelegate random_word(words), to: WordList
 end
