@@ -2,16 +2,22 @@ require Logger
 
 defmodule Dictionary.WordList do
 
-  def word_list() do
+  # Module attribute (like constant) with the name of the module
+  @me __MODULE__
+
+  def start_link() do
+    Agent.start_link(&word_list/0, name: @me)
+  end
+
+  def random_word() do
+    Agent.get(@me, &Enum.random/1)
+  end
+
+  defp word_list() do
     "../../assets/words.txt"
       |> Path.expand(__DIR__)
       |> File.read()
       |> process_file
-  end
-
-  def random_word(words) do
-    words
-      |> Enum.random
   end
 
   defp process_file({:ok, file}) do
