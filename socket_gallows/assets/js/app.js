@@ -1,3 +1,4 @@
+window.Vue = require("vue/dist/vue.js")
 import "../css/app.scss"
 
 // webpack automatically bundles all modules in your
