@@ -7,6 +7,7 @@ const RESPONSES = {
   initializing: ["info", "Let's Play!"]
 }
 
+import Vue from "vue"
 import HangmanSocket from "./hangman_socket"
 
 let view = function (hangman) {

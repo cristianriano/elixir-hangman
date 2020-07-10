@@ -1,4 +1,3 @@
-window.Vue = require("vue/dist/vue.js")
 import "../css/app.scss"
 
 // webpack automatically bundles all modules in your
@@ -11,4 +10,6 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "phoenix_html"
+import "vue"
+
 import "./hangman_app"
