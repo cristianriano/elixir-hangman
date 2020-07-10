@@ -47,6 +47,12 @@ let view = function (hangman) {
       turns_gt: function (left) {
         return this.tally.turns_left > left
       }
+    },
+    created () {
+      window.addEventListener("keydown", (evt) => {
+        let key = evt.key
+        if (/[a-z]{1}/.exec(key)) this.guess(key)
+      })
     }
   })
   return app;
